@@ -1,4 +1,4 @@
-# portafolio_modulo2
+# portafolio_modulo3
 
 Tienda de Ecommerce
 
@@ -8,11 +8,3 @@ Tecnologias aplicadas:
 
 - Html
 - Css, Bootstrap
-
-GitHub
-
-https://github.com/fraesriq/portafolio_modulo2
-
-Github Page
-
-https://fraesriq.github.io/portafolio_modulo2/
