@@ -112,6 +112,7 @@ function addToCart(sku) {
   let productFound = productsCar.find(
     (product) => product.sku == sku
   );
+  
   if (productFound) {
     productFound.amount += 1;
   } else {
@@ -163,7 +164,7 @@ function updateCar(productsList) {
 
 //FUNCION PARA ENCONTRAR PRODUCTO
 function findProduct(sku) {
-  let found = products.find((product) => product.sku == sku);
+  let found = productosStorage.find((product) => product.sku == sku);  
   return found;
 }
 
@@ -234,3 +235,5 @@ function discountItemInCar(sku){
   updateCar(productsCar);
   chargeCarProducts();
 }
+
+

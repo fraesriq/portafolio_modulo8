@@ -1,6 +1,6 @@
 let products = [
     {
-      sku: "0001",
+      sku: "P001",
       name: "Parlante Sony",
       description: "Parlante Bluetooth Sony SRS-XB43 Negro",
       det1: "Conexión Bluetooth: Sí",
@@ -8,10 +8,11 @@ let products = [
       det3: "Conexión USB: Sí",
       value: 15000,
       discount: 3200,
+      stock: 10,
       image: "prod_1.webp",
     },
     {
-      sku: "0002",
+      sku: "P002",
       name: "Silla de Camping",
       description: "Alpinextrem Silla de Camping Plegable Alpinextrem",
       det1: "Modelo: D21",
@@ -19,10 +20,11 @@ let products = [
       det3: "Peso: 1,2",
       value: 22000,
       discount: 1200,
+      stock: 10,
       image: "prod_2.webp",
     },
     {
-      sku: "0003",
+      sku: "P003",
       name: "Zapatilla",
       description: "Zapatilla Mujer Skechers",
       det1: "Marca: Skechers",
@@ -30,10 +32,11 @@ let products = [
       det3: "Hecho en: China",
       value: 25200,
       discount: 4500,
+      stock: 10,
       image: "prod_3.webp",
     },
     {
-      sku: "0004",
+      sku: "P004",
       name: "Linterna",
       description: "Linterna Recargable Fenix E09R",
       det1: "Linterna Recargable",
@@ -41,10 +44,11 @@ let products = [
       det3: "Dura hasta 70 horas.",
       value: 12500,
       discount: 1500,
+      stock: 10,
       image: "prod_4.webp",
     },
     {
-      sku: "0005",
+      sku: "P005",
       name: "Estuche",
       description: "Hori Estuche Nintendo Switch Hori Tough Pouch",
       det1: "Marca: Hori",
@@ -52,10 +56,11 @@ let products = [
       det3: "Peso: 1.2",
       value: 15000,
       discount: 3000,
+      stock: 10,
       image: "prod_5.webp",
     },
     {
-      sku: "0006",
+      sku: "P006",
       name: "Estuche",
       description: "Hori Estuche Nintendo Switch Hori Aluminio Pikachu",
       det1: "Marca: Hori",
@@ -63,7 +68,8 @@ let products = [
       det3: "Peso: 1.2",
       value: 15000,
       discount: 3000,
+      stock: 10,
       image: "prod_6.webp",
     },
     
-  ];
+];

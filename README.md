@@ -9,12 +9,8 @@ Tecnologias aplicadas:
 
 - Html
 - Css, Bootstrap
-- Javascript
+- Javascript (Clases, Metodos y Funciones)
 
 Link GitHub
 
-https://github.com/fraesriq/portafolio_modulo3
-
 Link GituhPage
-
-https://fraesriq.github.io/portafolio_modulo3/
