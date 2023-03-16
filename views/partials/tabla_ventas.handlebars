@@ -1,0 +1,23 @@
+<table id="tb_products" class="table table-sm table-bordered">
+  <thead>
+    <th>#</th>
+    <th>Fecha</th>    
+    <th>Productos</th>
+    <th>Total</th>    
+  </thead>
+  <tbody>
+    {{#each ventas}}
+    <tr>      
+      <td>{{this.id}}</td>      
+      <td>{{this.fecha}}</td>
+      <td>        
+        {{#each this.productos}}
+        <li>SKU: {{this.sku}} - CANT: {{this.amount}} - VALOR: {{this.value}} - DESCUENTO: {{this.discount}} - TOTAL: {{this.total}}</li>
+        {{/each}}
+        </ul>
+      </td>
+      <td>{{this.total}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

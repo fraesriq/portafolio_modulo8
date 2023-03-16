@@ -1,0 +1,34 @@
+<table id="tb_products" class="table table-sm table-bordered">
+  <thead>
+    <th>Sku</th>
+    <th>Imagen</th>
+    <th>Nombre</th>
+    <th>Descripción</th>
+    <th>Det 1</th>
+    <th>Det 2</th>
+    <th>Det 3</th>
+    <th>Valor</th>
+    <th>Descuento</th>
+    <th>Stock</th>
+    <th>Actualizar</th>
+    <th>Eliminar</th>
+  </thead>
+  <tbody id="bodyTbProducts">
+    {{#each productos}}
+    <tr>
+      <td>{{this.sku}}</td>
+      <td><img src="/imagenes/{{this.image}}" alt="{{this.image}}"></td>      
+      <td>{{this.nameProduct}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.det1}}</td>
+      <td>{{this.det2}}</td>
+      <td>{{this.det3}}</td>
+      <td>{{this.value}}</td>
+      <td>{{this.discount}}</td>
+      <td>{{this.stock}}</td>
+      <td><button class="btn btn-primary" onclick="editProduct('{{this.sku}}')"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      <td><button class="btn btn-danger" onclick="deleteProduct('{{this.sku}}')"><i class="fa-solid fa-trash"></i></button></td>      
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

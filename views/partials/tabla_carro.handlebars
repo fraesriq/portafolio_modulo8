@@ -1,0 +1,26 @@
+<table id="tb_products" class="table table-sm table-bordered">
+  <thead>
+    <th>#</th>
+    <th>Sku</th>    
+    <th>Nombre</th>
+    <th>Precio Normal</th>
+    <th>Descuento</th>
+    <th>Precio Unitario</th>
+    <th>Cantidad</th>
+    <th>Precio Total</th>    
+  </thead>
+  <tbody>
+    {{#each productos}}
+    <tr>
+      <td>1</td>      
+      <td>{{this.sku}}</td>      
+      <td>{{this.name}}</td>
+      <td>{{this.value}}</td>
+      <td>{{this.discount}}</td>
+      <td>unitario</td>
+      <td>cantidad</td>      
+      <td>total</td>      
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

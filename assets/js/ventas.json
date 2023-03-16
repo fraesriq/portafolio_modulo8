@@ -1,0 +1,102 @@
+{
+  "ventas": [
+    {
+      "id": "873048",
+      "fecha": "14-03-2023",
+      "productos": [
+        {
+          "sku": "P002",
+          "amount": 1,
+          "value": 22000,
+          "discount": 1200,
+          "total": 20800
+        },
+        {
+          "sku": "P001",
+          "amount": 1,
+          "value": 15000,
+          "discount": 10000,
+          "total": 5000
+        },
+        {
+          "sku": "P003",
+          "amount": 1,
+          "value": 25200,
+          "discount": 4500,
+          "total": 20700
+        },
+        {
+          "sku": "P006",
+          "amount": 1,
+          "value": 15000,
+          "discount": 3000,
+          "total": 12000
+        }
+      ],
+      "total": 58500
+    },
+    {
+      "id": "577ac8",
+      "fecha": "14-03-2023",
+      "productos": [
+        {
+          "sku": "P001",
+          "amount": 3,
+          "value": 15000,
+          "discount": 10000,
+          "total": 5000
+        },
+        {
+          "sku": "P005",
+          "amount": 1,
+          "value": 15000,
+          "discount": 3000,
+          "total": 12000
+        },
+        {
+          "sku": "P004",
+          "amount": 1,
+          "value": 12500,
+          "discount": 1500,
+          "total": 11000
+        }
+      ],
+      "total": 38000
+    },
+    {
+      "id": "3476c8",
+      "fecha": "15-03-2023",
+      "productos": [
+        {
+          "sku": "P002",
+          "amount": 1,
+          "value": 22000,
+          "discount": 1200,
+          "total": 20800
+        }
+      ],
+      "total": 20800
+    },
+    {
+      "id": "cf5a92",
+      "fecha": "15-03-2023",
+      "productos": [
+        {
+          "sku": "P006",
+          "amount": 2,
+          "value": 15000,
+          "discount": 3000,
+          "total": 12000
+        },
+        {
+          "sku": "P005",
+          "amount": 1,
+          "value": 15000,
+          "discount": 3000,
+          "total": 12000
+        }
+      ],
+      "total": 36000
+    }
+  ]
+}

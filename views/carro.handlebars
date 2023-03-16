@@ -1,0 +1,65 @@
+<main class="container">
+  <section id="productos-carrito">
+    <h1 class="text-center my-5">LISTADO DE PRODUCTOS</h1>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-danger" id="btn-vaciar">Vaciar carrito</button>
+      <button class="btn btn-primary" id="btn-comprar" style="margin-left: 10px;">Comprar ahora</button>
+    </div>
+
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">SKU</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio normal</th>
+            <th scope="col">Descuento</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">cantidad</th>
+            <th scope="col">Precio total</th>
+          </tr>
+        </thead>
+        <tbody id="carProductsTbl">
+          <!-- CARGAR PRODUCTOS DE FORMA DINAMICA -->
+        </tbody>
+      </table>
+      <label for="cupon"><strong>Cupon descuento:</strong></label>
+      <input type="text" name="cupon" id="input-cupon">
+      <button id="btn-descuento" class="btn btn-primary my-2">Aplicar descuento</button>
+      <p id="precio-total" class="text-end"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function (event) {
+    //código a ejecutar cuando el DOM está listo para recibir acciones    
+    chargeCarProducts();
+  });
+
+
+  let btnEmptyCar = document.getElementById("btn-vaciar");
+  let btnDiscount = document.getElementById("btn-descuento");
+  let btnBuy = document.getElementById("btn-comprar");
+
+  //LÓGICA DESCUENTO POR CUPÓN
+  btnDiscount.addEventListener("click", function (event) {
+    event.preventDefault();
+    discountApply();
+  });
+
+  //COMPRA
+  btnBuy.addEventListener("click", function (event) {
+    event.preventDefault();
+    buy();
+  });
+  
+  //EVENTO ON CLICK DEL BOTON PARA VACIAR EL CARRITO
+  btnEmptyCar.addEventListener("click", function (event) {
+    event.preventDefault();
+    emptyCar();
+  });
+  
+</script>

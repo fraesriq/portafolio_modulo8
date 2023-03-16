@@ -1,0 +1,76 @@
+{
+  "productos": [
+    {
+      "sku": "P001",
+      "nameProduct": "Parlante Sony",
+      "description": "Parlante Bluetooth Sony SRS-XB43 Negro",
+      "image": "prod_1.webp",
+      "det1": "Conexión Bluetooth: Sí",
+      "det2": "Potencia: 10W",
+      "det3": "Conexión USB: Sí",
+      "value": "15000",
+      "discount": "10000",
+      "stock": 6
+    },
+    {
+      "sku": "P002",
+      "nameProduct": "Silla de Camping",
+      "description": "Alpinextrem Silla de Camping Plegable Alpinextrem",
+      "image": "prod_2.webp",
+      "det1": "Modelo: D21",
+      "det2": "Hecho en: China",
+      "det3": "Peso: 1,2",
+      "value": "22000",
+      "discount": "1200",
+      "stock": 8
+    },
+    {
+      "sku": "P003",
+      "nameProduct": "Zapatilla",
+      "description": "Zapatilla Mujer Skechers",
+      "image": "prod_3.webp",
+      "det1": "Marca: Skechers",
+      "det2": "Modelo: 128273-BLK",
+      "det3": "Hecho en: China",
+      "value": "25200",
+      "discount": "4500",
+      "stock": 9
+    },
+    {
+      "sku": "P004",
+      "nameProduct": "Linterna",
+      "description": "Linterna Recargable Fenix E09R",
+      "det1": "Linterna Recargable",
+      "det2": "Hasta 600 lumenes",
+      "det3": "Dura hasta 70 horas.",
+      "value": 12500,
+      "discount": 1500,
+      "stock": 9,
+      "image": "prod_4.webp"
+    },
+    {
+      "sku": "P005",
+      "nameProduct": "Estuche",
+      "description": "Hori Estuche Nintendo Switch Hori Tough Pouch",
+      "det1": "Marca: Hori",
+      "det2": "Modelo: Tough Pouch",
+      "det3": "Peso: 1.2",
+      "value": 15000,
+      "discount": 3000,
+      "stock": 8,
+      "image": "prod_5.webp"
+    },
+    {
+      "sku": "P006",
+      "nameProduct": "Estuche",
+      "description": "Hori Estuche Nintendo Switch Hori Aluminio Pikachu",
+      "image": "prod_6.webp",
+      "det1": "Marca: Hori",
+      "det2": "Modelo: Aluminio Pikachu",
+      "det3": "Peso: 1.2",
+      "value": "15000",
+      "discount": "3000",
+      "stock": 12
+    }
+  ]
+}

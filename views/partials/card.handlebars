@@ -1,0 +1,48 @@
+{{#each productos}}
+<div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+  <div class="card">
+    <img src="/imagenes/{{this.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{this.name}}</h5>
+      <p class="card-text">{{this.description}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{this.det1}}</li>
+      <li class="list-group-item">{{this.det2}}</li>
+      <li class="list-group-item">{{this.det3}}</li>
+    </ul>
+    <div class="card-body">
+
+      <div id="precios">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 text-left mt-2">
+            <h4>Precio Normal</h4>
+            <p>{{this.value}}</p>
+          </div>
+          <div class="col-sm-12 col-md-4 text-left mt-2">
+            <h4>Descuento</h4>
+            <p>{{this.discount}}</p>
+          </div>
+          <div class="col-sm-12 col-md-4 text-left mt-2">
+            <h4>Precio Final</h4>
+            <p>{{this.pFinal}}</p>            
+          </div>
+        </div>
+      </div>
+
+      <div id="acciones">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 text-center mt-2">
+            <a href="producto/{{this.sku}}" class="btn btn-primary">Descripción</a>
+          </div>
+          <div class="col-sm-12 col-md-6 text-center mt-2">
+            <a href="#" class="btn btn-danger" data-sku="{{this.sku}}" onclick="addToCart('{{this.sku}}')">Añadir al
+              Carro</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{{/each}}
