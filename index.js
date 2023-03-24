@@ -1,6 +1,22 @@
 import app from './app.js';
 import { sequelize } from './database/database.js';
 
+// --------------------------------------------------
+// -------------- IMPORTAR MODELOS ------------------
+// --------------------------------------------------
+import './models/Producto.model.js';
+import './models/Carro.model.js';
+import './models/DetalleCarro.model.js';
+import './models/Usuario.model.js';
+import './models/Venta.model.js';
+import './models/DetalleVenta.model.js';
+
+// --------------------------------------------------
+// -------------- IMPORTAR RELACIONES----------------
+// --------------------------------------------------
+
+import './models/Relaciones.js';
+
 const main = async () => {
   try {
     await sequelize.authenticate();
