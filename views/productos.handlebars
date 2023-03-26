@@ -1,6 +1,13 @@
 <div id="productos" class="container mt-3">
   <div class="row">
     <!-- Seccion donde se cargara el listado de productos del sitio -->
-    {{> card}}    
+
+    {{#if productos}}
+      {{> card}}    
+    {{else}}
+      <div class="container" style="width: 100%; line-height: 100px; font-size: 20px;">
+        No hay productos ingresados
+      </div> 
+    {{/if}}
   </div>
 </div>

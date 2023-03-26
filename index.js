@@ -17,11 +17,18 @@ import './models/DetalleVenta.model.js';
 
 import './models/Relaciones.js';
 
+//importar datos de prueba
+import './seed.js';
+
 const main = async () => {
   try {
     await sequelize.authenticate();
     console.log('Nos hemos conectado con éxito');
-    await sequelize.sync({ force: true, alter: true});
+    await sequelize.sync({
+      force: false,
+      alter: true,
+      logging: false
+    });
     let PORT = 3002;
     app.listen(PORT, () => {console.log("Servidor escuchando en http://localhost:"+PORT);})
   } catch (error) {

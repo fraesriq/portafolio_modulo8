@@ -19,35 +19,31 @@ let coupons = [
   },
 ];
 
-
-if (localStorage.getItem("products")) {
-  console.log('obtiene items del carro');
-  productsCar = JSON.parse(localStorage.getItem("products"));  
-  updateCar(productsCar);
-}
-
 //FUNCION ENCARGADA DE AGREGAR PRODUCTOS AL CARRO
-function addToCart(sku) {
+function addToCart(id) {
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
-  let objProduct = {
-    sku,
-    amount: 1,
+  var raw = JSON.stringify({
+    "idUsuario": "1",
+    "id_producto": id,
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
   };
 
-  let productFound = productsCar.find(
-    (product) => product.sku == sku
-  );
-  
-  if (productFound) {
-    productFound.amount += 1;
-  } else {
-    productsCar.push(objProduct);
-  }
-
-  updateCar(productsCar);
-  alertSystem('success', 'Producto agregado correctamente.');
+  fetch("/api/v1/carro", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      alertSystem('success', result.message);      
+    })
+    .catch(error => console.log('error', error));
 }
-
+ 
 //FUNCION ENCARGADA DE ACTUALIZAR PRODUCTOS DEL CARRO
 function updateCar(productsList) {
   localStorage.setItem("products", JSON.stringify(productsList));
@@ -69,37 +65,76 @@ async function chargeCarProducts() {
   let elements = "";
   carProductsTbl.innerHTML = "";
 
-  
-  await Promise.all(productsCar.map(async (product, index) => {
+  fetch("/api/v1/carro")
+    .then(response => response.json())
+    .then(result => {
+      if (result.code == 200) {
+        let carro = result.data[0];
+        console.log('Resultado', carro);
+        let idCarro = carro.id;
+        let detalle_carro = carro.detalle_carros;
+        let usuarioId = carro.usuarioId;
 
-    let productFound = await findProduct(product.sku);    
+        detalle_carro.map((detalle, index) => {
+          console.log(detalle);
+          
+          let template = `
+            <tr>
+              <th scope="row">${index + 1}</th>
+              <td>${detalle.producto.sku}</td>
+              <td>${detalle.producto.nameProduct}</td>
+              <td>${detalle.producto.value}</td>
+              <td>${detalle.producto.discount}</td>
+              <td>unitPrice</td>
+              <td>
+                <button onclick="discountItemInCar('${detalle.producto.sku}')">-</button>
+                <input type="number" value="${detalle.amount}" style="width:30px;" min="0" max="10">
+                <button onclick="addItemInCar('${detalle.producto.sku}')">+</button>
+              </td>
+              <td>total</td>
+            </tr>
+          `;
+          elements += template;
+            
+        });
+
+        carProductsTbl.innerHTML = elements; 
+        
+      } else {
+        toastr.error(result.message);
+      }
+    })
+    .catch(error => console.log('error', error));
+  // await Promise.all(productsCar.map(async (product, index) => {
+
+  //   let productFound = await findProduct(product.sku);    
     
-    let unitPrice = productFound.value - productFound.discount;
-    let totalProduct = product.amount * unitPrice;
-    fullAmountPurchase += totalProduct;
+  //   let unitPrice = productFound.value - productFound.discount;
+  //   let totalProduct = product.amount * unitPrice;
+  //   fullAmountPurchase += totalProduct;
 
-    let template = `
-      <tr>
-        <th scope="row">${index + 1}</th>
-        <td>${productFound.sku}</td>
-        <td>${productFound.nameProduct}</td>
-        <td>${productFound.value}</td>
-        <td>${productFound.discount}</td>
-        <td>${unitPrice}</td>
-        <td>
-          <button onclick="discountItemInCar('${productFound.sku}')">-</button>
-          <input type="number" value="${product.amount}" style="width:30px;" min="0" max="10">
-          <button onclick="addItemInCar('${productFound.sku}')">+</button>
-        </td>
-        <td>${totalProduct}</td>
-      </tr>
-    `;
-    elements += template;
+  //   let template = `
+  //     <tr>
+  //       <th scope="row">${index + 1}</th>
+  //       <td>${productFound.sku}</td>
+  //       <td>${productFound.nameProduct}</td>
+  //       <td>${productFound.value}</td>
+  //       <td>${productFound.discount}</td>
+  //       <td>${unitPrice}</td>
+  //       <td>
+  //         <button onclick="discountItemInCar('${productFound.sku}')">-</button>
+  //         <input type="number" value="${product.amount}" style="width:30px;" min="0" max="10">
+  //         <button onclick="addItemInCar('${productFound.sku}')">+</button>
+  //       </td>
+  //       <td>${totalProduct}</td>
+  //     </tr>
+  //   `;
+  //   elements += template;
     
-  }));  
+  // }));  
 
-  carProductsTbl.innerHTML = elements;  
-  document.querySelector("#precio-total").innerHTML = `El precio total de la compra es: <strong>$${fullAmountPurchase}</strong>`;
+  // carProductsTbl.innerHTML = elements;  
+  // document.querySelector("#precio-total").innerHTML = `El precio total de la compra es: <strong>$${fullAmountPurchase}</strong>`;
 }
 
 //FUNCION PARA ENCONTRAR PRODUCTO

@@ -26,8 +26,8 @@
       <td>{{this.value}}</td>
       <td>{{this.discount}}</td>
       <td>{{this.stock}}</td>
-      <td><button class="btn btn-primary" onclick="editProduct('{{this.sku}}')"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      <td><button class="btn btn-danger" onclick="deleteProduct('{{this.sku}}')"><i class="fa-solid fa-trash"></i></button></td>      
+      <td><button class="btn btn-primary" onclick="editProduct('{{this.id}}')"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      <td><button class="btn btn-danger" onclick="deleteProduct('{{this.id}}')"><i class="fa-solid fa-trash"></i></button></td>      
     </tr>
     {{/each}}
   </tbody>
