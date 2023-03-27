@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../database/database.js'
 
 export const DetalleVenta = sequelize.define('detalle_venta', {
   amount: {
@@ -20,6 +20,6 @@ export const DetalleVenta = sequelize.define('detalle_venta', {
       isDecimal: true
     }
   }
-},{
-  timestamps:false
-});
+}, {
+  timestamps: false
+})

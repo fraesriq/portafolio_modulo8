@@ -8,7 +8,10 @@ import { Venta } from "./Venta.model.js";
 import { DetalleVenta } from "./DetalleVenta.model.js";
 
 //RELACION CARRO A DETALLE
-Carro.hasMany(DetalleCarro);
+Carro.hasMany(DetalleCarro,{
+  onDelete: 'CASCADE'
+});
+
 DetalleCarro.belongsTo(Carro);
 
 //RELACION CARRO A USUARIO

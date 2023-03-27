@@ -11,30 +11,30 @@ export const getCarro = async (req, res) => {
     include: [
       {
         model: DetalleCarro,
-        include: [Producto]        
+        include: [Producto]
       }
     ]
   }).then(carro => {
-    res.json({ code: 200, data: carro });
+    res.json({ code: 200, data: carro })
   }).catch(error => {
-    res.json({ code: 500, meessage: "Error al cargar el carrito." });
+    console.log(error)
+    res.json({ code: 500, message: 'Error al cargar el carrito.' })
   })
 }
 
 export const addProductCarro = async (req, res) => {
   try {
-    
-    let { idUsuario, id_producto } = req.body;
-    let usuarioId = idUsuario;
+    const { idUsuario, id_producto } = req.body
+    const usuarioId = idUsuario
 
-    const [carroCliente, created] = await Carro.findOrCreate({
+    const [carroCliente] = await Carro.findOrCreate({
       raw: true,
       where: { usuarioId },
       defaults: {
         usuarioId
       }
-    });
-    console.log(carroCliente);
+    })
+    console.log(carroCliente)
     const [carroWhitProducts, create2] = await DetalleCarro.findOrCreate({
       where: { carroId: carroCliente.id, productoId: id_producto },
       defaults: {
@@ -45,40 +45,54 @@ export const addProductCarro = async (req, res) => {
     })
 
     if (!create2) {
-      carroWhitProducts.increment({ amount: 1 });
+      carroWhitProducts.increment({ amount: 1 })
     }
 
-    let producto = await Producto.findByPk(id_producto);
+    const producto = await Producto.findByPk(id_producto)
 
     if (carroWhitProducts.amount > producto.stock) {
       await carroWhitProducts.update({ amount: producto.stock }, {
         where: {
-          id:producto.id
+          id: producto.id
         }
-      })  
+      })
 
-      return res.status(201).json({message: "No hay más productos en stock."})
+      return res.status(201).json({ message: 'No hay más productos en stock.' })
     }
 
-    res.status(201).json({ message: "Producto agregado correctamente." });
-
+    res.status(201).json({ message: 'Producto agregado correctamente.' })
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ code: 500, message: "Error al agregar el producto al carro." });
+    console.log(error)
+    res.status(500).json({ code: 500, message: 'Error al agregar el producto al carro.' })
+  }
+}
+
+export const deleteCarro = async (req, res) => {
+  try {
+    const { id_carro } = req.body
+
+    await Carro.destroy({
+      where: {
+        id: id_carro
+      }
+    })
+
+    res.json({ code: 200, message: 'Carro eliminado con exito!.' })
+  } catch (error) {
+    res.status(500).json({ code: 500, message: 'Error al eliminar el carro!.' })
   }
 }
 
 export const deleteProductCarro = async (req, res) => {
   try {
-    
-    let { id_product } = req.body;
-    let idCliente = 1;
+    const { id_product } = req.body
+    const idCliente = 1
     const carroCliente = await Carro.findOne({
       raw: true,
       where: {
         usuarioId: idCliente
       }
-    });
+    })
 
     const carroWithProducts = await DetalleCarro.findOne({
       where: {
@@ -87,20 +101,19 @@ export const deleteProductCarro = async (req, res) => {
     })
 
     if (carroWithProducts === null) {
-      return res.status(400).json({message: "El producto que intenta restar no existe."})
+      return res.status(400).json({ message: 'El producto que intenta restar no existe.' })
     }
 
-    await carroWithProducts.decrement({ amount: 1 });
+    await carroWithProducts.decrement({ amount: 1 })
 
-    if (carroWithProducts.dataValues.amount == 0) {
-      carroWithProducts.destroy();
-      return req.status(201).json({ message: "Ha quitado todos los productos de este tipo." });
+    if (carroWithProducts.dataValues.amount === 0) {
+      carroWithProducts.destroy()
+      return res.status(201).json({ message: 'Ha quitado todos los productos de este tipo.' })
     }
 
-    return req.status(201).json({ message: "Producto Eliminado correctamente." });
-
+    return res.status(201).json({ message: 'Producto Eliminado correctamente.' })
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Error al agregar el producto al carro." });
+    console.log(error)
+    res.status(500).json({ message: 'Error al agregar el producto al carro.' })
   }
 }

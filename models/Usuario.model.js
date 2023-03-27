@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../database/database.js'
 
 export const Usuario = sequelize.define('usuario', {
   name: {
@@ -23,6 +23,6 @@ export const Usuario = sequelize.define('usuario', {
       notEmpty: true
     }
   }
-},{
-  timestamps:false
-});
+}, {
+  timestamps: false
+})

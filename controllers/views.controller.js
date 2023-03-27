@@ -1,34 +1,44 @@
-import { Producto } from "../models/Producto.model.js";
+import { Carro } from '../models/Carro.model.js'
+import { Producto } from '../models/Producto.model.js'
 
 export const controllerHome = async (req, res) => {
-  res.render("home");
+  res.render('home')
 }
 
 export const controllerProductos = async (req, res) => {
-  let productos = await Producto.findAll({
+  const productos = await Producto.findAll({
     raw: true,
     order: [
-      ["nameProduct","ASC"]
+      ['nameProduct', 'ASC']
     ]
-  })  
-  res.render("productos", {
+  })
+  res.render('productos', {
     productos
   })
 }
 
 export const controllerMantenedor = async (req, res) => {
-  let productos = await Producto.findAll({
+  const productos = await Producto.findAll({
     raw: true,
     order: [
-      ["nameProduct","ASC"]
+      ['nameProduct', 'ASC']
     ]
   })
-  res.render("mantenedor", {
-    id_modal : 'modal_mantenedor',
-    productos :productos
+  res.render('mantenedor', {
+    id_modal: 'modal_mantenedor',
+    nproductos: productos
   })
 }
 
 export const controllerCarro = async (req, res) => {
-  res.render("carro");
+  const userId = 1
+  const carro = await Carro.findAll({
+    raw: true,
+    where: {
+      usuarioId: userId
+    }
+  })
+  res.render('carro', {
+    carro: carro[0]
+  })
 }

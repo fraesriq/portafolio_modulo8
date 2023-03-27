@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../database/database.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../database/database.js'
 
 export const Venta = sequelize.define('venta', {
   date: {
@@ -8,16 +8,16 @@ export const Venta = sequelize.define('venta', {
     defaultValue: DataTypes.NOW,
     validate: {
       notEmpty: true,
-      isDate:true
+      isDate: true
     }
   },
   value: {
     type: DataTypes.DECIMAL,
-    allowNull: false,
+    allowNull: true,
     validate: {
-      min:0
+      min: 0
     }
   }
-},{
-  timestamps:false
-});
+}, {
+  timestamps: false
+})
