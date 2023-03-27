@@ -20,12 +20,12 @@ import './models/Relaciones.js'
 // importar datos de prueba
 import { cargarSemillas } from './seed.js'
 
-const forceMetod = false // Si fuerzo la sincronizacion borra los datos y carga las semillas
+const forceMetod = true // Si fuerzo la sincronizacion borra los datos y carga las semillas
 
 const main = async () => {
   try {
     await sequelize.authenticate()
-    console.log('Nos hemos conectado con éxito')
+    // console.log('Nos hemos conectado con éxito')
     await sequelize.sync({
       force: forceMetod,
       alter: true,

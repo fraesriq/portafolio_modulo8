@@ -34,7 +34,7 @@ export const addProductCarro = async (req, res) => {
         usuarioId
       }
     })
-    console.log(carroCliente)
+    // console.log(carroCliente)
     const [carroWhitProducts, create2] = await DetalleCarro.findOrCreate({
       where: { carroId: carroCliente.id, productoId: id_producto },
       defaults: {

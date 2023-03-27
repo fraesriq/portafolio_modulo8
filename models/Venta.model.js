@@ -11,12 +11,8 @@ export const Venta = sequelize.define('venta', {
       isDate: true
     }
   },
-  value: {
-    type: DataTypes.DECIMAL,
-    allowNull: true,
-    validate: {
-      min: 0
-    }
+  totalValue: {
+    type: DataTypes.INTEGER,
   }
 }, {
   timestamps: false

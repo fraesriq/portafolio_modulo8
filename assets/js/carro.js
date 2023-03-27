@@ -219,15 +219,15 @@ function buy () {
   const requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: raw
+    body: raw,
+    redirect: 'follow'
   }
 
   fetch('/api/v1/ventas', requestOptions)
     .then(response => response.json())
     .then(result => {
-      if (result.code === 201) {
-        alertSystem(result.message)
-        chargeCarProducts()
+      if (result.code === 201) {        
+        location.href = "/success"
       } else {
         alertSystem(result.error)
       }

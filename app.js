@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import { create } from 'express-handlebars'
+import {sumarHelper,restarHelper,fechaHelper} from './helpers/helpers.js'
+
 
 import * as path from 'path'
 import { fileURLToPath } from 'url'
@@ -51,16 +53,12 @@ app.use('/js', express.static(__dirname + '/assets/js'))
 // ------------------- HANDLEBARS-------------------
 // -------------------------------------------------
 
-// Define Handlebars helpers
-const hbsHelpers = {
-  restar: function (a, b) {
-    const result = a - b
-    return `${result}`
-  }
-}
-
 const hbs = create({
-  helpers: hbsHelpers,
+  helpers: {
+    sumarHelper,
+    restarHelper,
+    fechaHelper
+  },
   partialsDir: [
     'views/partials/'
   ]

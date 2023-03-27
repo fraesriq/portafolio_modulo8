@@ -24,11 +24,11 @@
           <tr>
             <td>{{producto.value}}</td>
             <td>{{producto.discount}}</td>
-            <td>{{producto.pFinal}}</th>
+            <td>{{restarHelper producto.value producto.discount}}</th>
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary" onclick="addToCart('{{producto.sku}}')">Agregar al Carro</button>
+      <button class="btn btn-primary" onclick="addToCart('{{producto.id}}')">Agregar al Carro</button>
     </div>
   </div>
 </div>

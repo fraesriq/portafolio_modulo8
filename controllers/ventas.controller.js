@@ -5,6 +5,24 @@ import { DetalleCarro } from '../models/DetalleCarro.model.js'
 import { Carro } from '../models/Carro.model.js'
 import { sequelize } from '../database/database.js'
 
+export const getVentas = async (req, res) => {
+  
+  Venta.findAll({
+    include: [
+      {
+        model: DetalleVenta,
+        include: [Producto]
+      }
+    ]
+  }).then(ventas => {
+    res.json({ code: 200, data: ventas })
+  }).catch(error => {
+    console.log(error)
+    res.json({ code: 500, message: 'Error al cargar las Ventas.' })
+  })
+  
+}
+
 export const generarVenta = async (req, res) => {
   
   let idClient = req.body.idCliente
@@ -38,6 +56,7 @@ export const generarVenta = async (req, res) => {
 
     let idVenta = nuevaVenta.dataValues.id;
     let total = 0;
+
     for (let index = 0; index < detalleCarro.length; index++) {
 
       let id = detalleCarro[index].productoId;
@@ -67,21 +86,22 @@ export const generarVenta = async (req, res) => {
         }
       }, { transaction: t })
 
-      total += subTotal
+      total += subTotal * amount
     }
 
+    console.log('Total: ',total);
     //Actualizo el monto de la venta
-    await Venta.update({value:total}, {
-      where: {
-        id:idVenta
-      }
-    }, { transaction: t });
+    await Venta.update(
+      { totalValue: total },
+      {
+        where: { id: idVenta }
+      }, { transaction: t });
 
     await t.commit();
     res.status(201).json({ code: 201, message: "Venta generada correctamente." })
     
   } catch (error) {
-    console.log(error)
+    console.log('Error al crear Venta',error)
     await t.rollback()
     res.status(500).json({code: 500, error:"Error al generar la venta."})
   }
