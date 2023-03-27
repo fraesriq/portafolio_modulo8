@@ -13,7 +13,7 @@
       <td>        
         {{#each this.detalle_venta}}
           {{this.dataValues.producto.dataValues.nameProduct}}
-          <li>SKU: {{this.dataValues.producto.dataValues.sku}} - CANT: {{this.dataValues.amount}} - VALOR: {{this.dataValues.value}} - DESCUENTO: {{this.dataValues.producto.dataValues.discount}} - TOTAL: {{restarHelper this.dataValues.value this.dataValues.producto.dataValues.discount}}</li>
+          <li>SKU: {{this.dataValues.producto.dataValues.sku}} - CANT: {{this.dataValues.amount}} - VALOR: {{this.dataValues.producto.dataValues.value}} - DESCUENTO: {{this.dataValues.producto.dataValues.discount}} - TOTAL: {{restarHelper this.dataValues.producto.dataValues.value this.dataValues.producto.dataValues.discount}}</li>
         {{/each}}
         </ul>
       </td>

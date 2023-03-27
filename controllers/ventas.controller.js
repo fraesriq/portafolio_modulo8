@@ -83,19 +83,23 @@ export const generarVenta = async (req, res) => {
       await Carro.destroy({
         where:{
           usuarioId: idClient
-        }
-      }, { transaction: t })
-
+        },
+        transaction: t
+      })
+      console.log('subTotal: ',subTotal);
       total += subTotal * amount
     }
 
     console.log('Total: ',total);
     //Actualizo el monto de la venta
     await Venta.update(
-      { totalValue: total },
       {
-        where: { id: idVenta }
-      }, { transaction: t });
+        totalValue: total
+      },
+      {
+        where: { id: idVenta },
+        transaction: t
+      });
 
     await t.commit();
     res.status(201).json({ code: 201, message: "Venta generada correctamente." })
