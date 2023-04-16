@@ -25,7 +25,15 @@ async function chargeCarProducts () {
   carProductsTbl.innerHTML = ''
   let totalCompra = 0
 
-  fetch('/api/v1/carro')
+  const myHeaders = new Headers()
+  myHeaders.append('Content-Type', 'application/json')
+  myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
+
+  const requestOptions = {    
+    headers: myHeaders
+  }
+
+  fetch('/api/v1/carro',requestOptions)
     .then(response => response.json())
     .then(result => {
       if (result.code == 200) {
@@ -72,12 +80,13 @@ async function chargeCarProducts () {
 }
 
 // FUNCION ENCARGADA DE AGREGAR PRODUCTOS AL CARRO
-function addToCart (id) {
+function addToCart(id) {  
+
   const myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
+  myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
 
   const raw = JSON.stringify({
-    idUsuario: '1',
     id_producto: id
   })
 
@@ -100,6 +109,7 @@ function addToCart (id) {
 function addItemInCar (id) {
   const myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
+  myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
 
   const raw = JSON.stringify({
     idUsuario: '1',
@@ -125,6 +135,7 @@ function addItemInCar (id) {
 function discountItemInCar (id) {
   const myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
+  myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
 
   const raw = JSON.stringify({
     id_product: id
@@ -161,6 +172,7 @@ function emptyCar (id) {
     if (result.value) {
       const myHeaders = new Headers()
       myHeaders.append('Content-Type', 'application/json')
+      myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
 
       const raw = JSON.stringify({
         id_carro: id
@@ -211,15 +223,11 @@ function discountApply () {
 function buy () {
   const myHeaders = new Headers()
   myHeaders.append('Content-Type', 'application/json')
-
-  const raw = JSON.stringify({
-    idCliente: 1
-  })
+  myHeaders.append("authorization", "Bearer " + localStorage.getItem("jwt"));
 
   const requestOptions = {
     method: 'POST',
     headers: myHeaders,
-    body: raw,
     redirect: 'follow'
   }
 

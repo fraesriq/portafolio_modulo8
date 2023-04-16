@@ -20,7 +20,7 @@ import './models/Relaciones.js'
 // importar datos de prueba
 import { cargarSemillas } from './seed.js'
 
-const forceMetod = true // Si fuerzo la sincronizacion borra los datos y carga las semillas
+const forceMetod = false // Si fuerzo la sincronizacion borra los datos y carga las semillas
 
 const main = async () => {
   try {
@@ -34,7 +34,8 @@ const main = async () => {
     if (forceMetod) {
       cargarSemillas()
     }
-    const PORT = 3002
+    const PORT = process.env.PORT_BACKEND || 3003
+
     app.listen(PORT, () => { console.log('Servidor escuchando en http://localhost:' + PORT) })
   } catch (error) {
     console.log('Ha ocurrido un error: ', error)

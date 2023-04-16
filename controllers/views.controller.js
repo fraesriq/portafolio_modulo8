@@ -69,7 +69,10 @@ export const controllerSuccess = async (req, res) => {
 
 export const controllerVentas = async (req, res) => {
 
-  Venta.findAll({    
+  const usuarioId = req.user.id
+
+  Venta.findAll({   
+    where: { usuarioId },
     include: [
       {        
         model: DetalleVenta,        

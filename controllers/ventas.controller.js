@@ -7,7 +7,10 @@ import { sequelize } from '../database/database.js'
 
 export const getVentas = async (req, res) => {
   
+  const usuarioId = req.user.id
+
   Venta.findAll({
+    where: { usuarioId },
     include: [
       {
         model: DetalleVenta,
@@ -25,7 +28,7 @@ export const getVentas = async (req, res) => {
 
 export const generarVenta = async (req, res) => {
   
-  let idClient = req.body.idCliente
+  const usuarioId = req.user.id
   const t = await sequelize.transaction()
 
   try {
@@ -33,7 +36,7 @@ export const generarVenta = async (req, res) => {
     let carro = await Carro.findOne({
       raw: true,
       where: {
-        usuarioId: idClient
+        usuarioId
       }
     })
     
@@ -51,7 +54,7 @@ export const generarVenta = async (req, res) => {
     if (detalleCarro.length == 0) throw new Error("Cliente no tiene productos en el carro.")
 
     let nuevaVenta = await Venta.create({
-      usuarioId: idClient 
+      usuarioId 
     }, { transaction: t })
 
     let idVenta = nuevaVenta.dataValues.id;
@@ -82,7 +85,7 @@ export const generarVenta = async (req, res) => {
 
       await Carro.destroy({
         where:{
-          usuarioId: idClient
+          usuarioId
         },
         transaction: t
       })

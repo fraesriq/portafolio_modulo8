@@ -3,14 +3,60 @@
     <h1 class="text-center my-5">Login de usuario</h1>
 
     <section>
-      <form id="form-login">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" name="name" id="login-name" class="form-control my-1">
-        <label for="password" class="form-label">password</label>
-        <input type="password" name="password" id="login-password" class="form-control my-1">
+      <form id="formLogin">
+        <label for="defaultFormemail" class="form-label">Email</label>
+        <input type="text" name="defaultFormemail" id="defaultFormemail" class="form-control my-1">
+        <label for="defaultFormpass" class="form-label">password</label>
+        <input type="password" name="defaultFormpass" id="defaultFormpass" class="form-control my-1">
         <button type="submit" class="btn btn-primary">Loguear</button>
         <button type="reset" class="btn btn-warning">Limpiar</button>
       </form>
     </section>
   </section>
 </main>
+
+<script>
+  //EVENTO SUBMIT FORMULARIO LOGIN
+  formLogin.addEventListener("submit", (event) => {
+
+    event.preventDefault();
+
+    var fieldsValidate = {
+      defaultFormemail: { type: 'input', name: 'Email' },
+      defaultFormpass: { type: 'input', name: 'Password' }
+    };
+
+    //Si paso todas las validaciones
+    if (validateForm(fieldsValidate, 'formLogin', false)) {
+      const cabeceras = new Headers();
+      cabeceras.append("Content-Type", "application/json");
+
+      let objUser = {
+        email: defaultFormemail.value,
+        password: defaultFormpass.value
+      }
+
+      fetch("http://localhost:3001/api/v1/login", {
+        method: "POST",
+        headers: cabeceras,
+        body: JSON.stringify(objUser),
+        redirect: 'follow'
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('data: ', data);
+          if (data.code === 200) {
+            formLogin.reset();
+            localStorage.setItem("jwt", data.token)
+            location.href = '/'
+          } else {
+            toastr.error(data.message)
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
+
+  });
+</script>

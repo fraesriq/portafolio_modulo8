@@ -2,7 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import { create } from 'express-handlebars'
 import {sumarHelper,restarHelper,fechaHelper} from './helpers/helpers.js'
-
+import fileUpload from 'express-fileupload';
+import 'dotenv/config';
 
 import * as path from 'path'
 import { fileURLToPath } from 'url'
@@ -15,7 +16,8 @@ import viewsRoutes from './routes/views.routes.js'
 
 import productsRoutes from './routes/productos.routes.js'
 import carroRoutes from './routes/carro.routes.js'
-import vantasRoutes from './routes/ventas.routes.js'
+import ventasRoutes from './routes/ventas.routes.js'
+import usersRoutes from './routes/users.routes.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -28,15 +30,25 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
+let limiteMb = 2;
+app.use(fileUpload({
+  limits: { fileSize: limiteMb* 1024 * 1024 },
+  abortOnLimit: true,
+  responseOnLimit: `Usted ha superado el límite permitido (${limiteMb})`
+}));
+
 // -------------------------------------------------
 // ------------------- SERVIDOR --------------------
 // -------------------------------------------------
 app.use(viewsRoutes)
 app.use('/api/v1', productsRoutes)
 app.use('/api/v1', carroRoutes)
-app.use('/api/v1', vantasRoutes)
+app.use('/api/v1', ventasRoutes)
+app.use('/api/v1', usersRoutes);
 
-app.listen(3000, () => { console.log('Servidor en http://localhost:3000') })
+const PORT_FRONT = process.env.PORT_FRONTEND || 3000
+
+app.listen(PORT_FRONT, () => { console.log('Servidor en http://localhost:'+PORT_FRONT) })
 
 // -------------------------------------------------
 // ---------------- MIDLEWARE RUTAS ----------------

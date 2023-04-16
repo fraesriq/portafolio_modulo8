@@ -7,7 +7,11 @@ import { Producto } from '../models/Producto.model.js'
 // -----------------------------------------------------
 
 export const getCarro = async (req, res) => {
+
+  const usuarioId = req.user.id
+  console.log('usuarioId: ',usuarioId);
   Carro.findAll({
+    where: { usuarioId },
     include: [
       {
         model: DetalleCarro,
@@ -24,8 +28,9 @@ export const getCarro = async (req, res) => {
 
 export const addProductCarro = async (req, res) => {
   try {
-    const { idUsuario, id_producto } = req.body
-    const usuarioId = idUsuario
+    
+    const { id_producto } = req.body
+    const usuarioId = req.user.id
 
     const [carroCliente] = await Carro.findOrCreate({
       raw: true,
@@ -68,11 +73,15 @@ export const addProductCarro = async (req, res) => {
 }
 
 export const deleteCarro = async (req, res) => {
+
   try {
+    const usuarioId = req.user.id
+
     const { id_carro } = req.body
 
     await Carro.destroy({
       where: {
+        usuarioId,
         id: id_carro
       }
     })
@@ -85,12 +94,14 @@ export const deleteCarro = async (req, res) => {
 
 export const deleteProductCarro = async (req, res) => {
   try {
+    const usuarioId = req.user.id
+
     const { id_product } = req.body
-    const idCliente = 1
+    
     const carroCliente = await Carro.findOne({
       raw: true,
       where: {
-        usuarioId: idCliente
+        usuarioId
       }
     })
 

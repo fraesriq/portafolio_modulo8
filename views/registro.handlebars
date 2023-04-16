@@ -1,0 +1,73 @@
+<main class="container mb-4" style="display: flex;justify-content: center;">
+  <section id="login">
+    <h1 class="text-center my-5">Registro de usuario</h1>
+
+    <section>
+      <form id="formRegister">
+        <label for="registerFormname" class="form-label">Nombre</label>
+        <input type="text" name="registerFormname" id="registerFormname" class="form-control my-1">
+        <label for="registerFormemail" class="form-label">Email</label>
+        <input type="text" name="registerFormemail" id="registerFormemail" class="form-control my-1">
+        <label for="registerFormpass" class="form-label">Password</label>
+        <input type="password" name="registerFormpass" id="registerFormpass" class="form-control my-1">        
+        <label for="verifyFormpass" class="form-label">Confirme Password</label>
+        <input type="password" name="verifyFormpass" id="verifyFormpass" class="form-control my-1">
+        <button type="submit" class="btn btn-primary">Registrar</button>
+        <button type="reset" class="btn btn-warning">Limpiar</button>
+      </form>
+    </section>
+  </section>
+</main>
+
+<script>
+  //EVENTO SUBMIT FORMULARIO REGISTRO
+    formRegister.addEventListener("submit", (event) => {
+
+      event.preventDefault();
+
+      var fieldsValidate = {
+        registerFormname: { type: 'input', name: 'Nombre' },
+        registerFormemail: { type: 'input', name: 'Email' },
+        registerFormpass: { type: 'input', name: 'Password' },
+        verifyFormpass: { type: 'input', name: 'Repetir Password' }
+      };
+
+      //Si paso todas las validaciones
+      if (validateForm(fieldsValidate, 'formRegister', false)) {
+        if (registerFormpass.value == verifyFormpass.value) {
+
+          const cabeceras = new Headers();
+          cabeceras.append("Content-Type", "application/json");
+
+          let objUser = {
+            name: registerFormname.value,
+            email: registerFormemail.value,
+            password: registerFormpass.value
+          }
+
+          console.log('objUser: ', objUser);
+          fetch("http://localhost:3001/api/v1/register", {
+            method: "POST",
+            headers: cabeceras,
+            body: JSON.stringify(objUser)
+          })
+            .then(response => response.json())
+            .then(data => {
+              console.log('data: ', data);
+              if (data.code === 201) {
+                formRegister.reset();              
+                location.href = '/'  
+              } else {
+                alertSystem('error', data.message);
+              }
+            })
+            .catch(error => {
+              console.log(error);
+            })
+        } else {
+          toastr.error('Las password no coinciden!')
+        }
+      }
+
+    });
+    </script>
